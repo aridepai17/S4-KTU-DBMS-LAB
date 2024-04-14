@@ -1,0 +1,125 @@
+mysql> SELECT CURDATE() AS Today, DATE_ADD( CURDATE(), INTERVAL 1 DAY ) AS Tomorrow;
++------------+------------+
+| Today      | Tomorrow   |
++------------+------------+
+| 2024-03-24 | 2024-03-25 |
++------------+------------+
+1 row in set (0.01 sec)
+
+
+mysql> SELECT LAST_DAY(CURDATE()) AS 'LAST DAY OF THIS MONTH';
++------------------------+
+| LAST DAY OF THIS MONTH |
++------------------------+
+| 2024-03-31             |
++------------------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT DATE_ADD(CURDATE(), INTERVAL ((7 - WEEKDAY(CURDATE())) ) DAY) AS NEXTMONDAYDATE;
++------------------+
+| NEXTMONDAYDATE   |
++------------------+
+| 2024-03-25       |
++------------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+-----------+-------------+---------------+------------+--------+------------+
+| EMPID  | NAME      | ADDRESS     | DESIGNATION   | DEPARTMENT | SALARY | JOINDATE   |
++--------+-----------+-------------+---------------+------------+--------+------------+
+| 201    | VILLA     | KENTUCKY    | MANAGER       | CSE        | 20000  | 2010-12-15 |
+| 208    | BRUNO     | OHIO        | OFFICER       | HR         | 19000  | 2008-02-02 |
+| 210    | HARRY     | MANCHESTER  | CLERK         | FINANCE    | 7000   | 2013-04-10 |
+| 211    | RODRIGUEZ | MEDELLIN    | ASST MANAGER  | SALES      | 15000  | 2012-03-18 |
+| 213    | ALEXANDER | NEWCASTLE   | EXECUTIVE     | CSE        | 10000  | 2010-08-03 |
++--------+-----------+-------------+---------------+------------+--------+------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT MIN(LENGTH(Name)) AS 'MIN LENGTH' FROM EMPLOYEE;
++------------+
+| MIN LENGTH |
++------------+
+| 4          |
++------------+
+1 row in set (0.01 sec)
+
+
+mysql> SELECT Name FROM EMPLOYEE WHERE LENGTH(NAME) > 5;
++-----------+
+| NAME      |
++-----------+
+| RODRIGUEZ |
+| ALEXANDER |
++-----------+
+2 rows in set (0.00 sec)
+
+
+mysql> SELECT YEAR(JOINDATE) AS 'JOIN YEAR', MONTH(JOINDATE) AS 'JOIN MONTH',
+COUNT(*) AS 'NO OF EMP JOINED' FROM EMPLOYEE GROUP BY YEAR(JOINDATE), MONTH(JOINDATE) ORDER BY YEAR(JOINDATE);
+
++-----------+------------+-------------------+
+| JOIN YEAR | JOIN MONTH | NO OF EMP JOINED  |
++-----------+------------+-------------------+
+| 2008      | 2          | 1                 |
+| 2010      | 8          | 1                 |
+| 2010      | 12         | 1                 |
+| 2012      | 3          | 1                 |
+| 2013      | 4          | 1                 |
++-----------+------------+-------------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT SUBSTR('ENCYCLOPEDIA',4,3) AS CHARACTERS;
++------------+
+| CHARACTERS |
++------------+
+| YCL        |
++------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+mysql> SELECT REPLACE('MALAYALAM', 'A', 'E') AS REPLACEDWORD;
++---------------+
+| REPLACEDWORD  |
++---------------+
+| MELEYELEM     |
++---------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT REPLACE('ORACLE', 'OR', '') AS RESULT;
++--------+
+| RESULT |
++--------+
+| ACLE   |
++--------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT RPAD(LPAD('DATABASE', 12, '..'), 15, '_') AS PADDEDWORD;
++-----------------+
+| PADDEDWORD      |
++-----------------+
+| ....DATABASE___ |
++-----------------+
+1 row in set (0.01 sec)
+
+
+mysql> SELECT NAME,ROUND(SALARY / 30, 2) AS 'DAILY PAY' FROM EMPLOYEE;
++-------------+-----------+
+| Name        | DAILY PAY |
++-------------+-----------+
+| VILLA       | 666.67    |
+| BRUNO       | 633.33    |
+| HARRY       | 233.33    |
+| RODRIGUEZ   | 500.00    |
+| ALEXANDER   | 333.33    |
++-------------+-----------+
+5 rows in set (0.00 sec)
