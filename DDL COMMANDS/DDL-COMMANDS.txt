@@ -1,0 +1,114 @@
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| advaithrpai5       |
+| information_schema |
+| joel41             |
+| mysql              |
+| performance_schema |
+| safuan             |
+| sys                |
++--------------------+
+
+mysql> use advaithrpai5;
+Database changed
+mysql> CREATE TABLE STUDENT(NAME varchar(100),ROLLNO int(10),ADDRESS varchar(100),GENDER varchar(10),PHONENO int(10),BRANCH varchar(100),MARK1 int(10),MARK2 int(10));
+Query OK, 0 rows affected, 4 warnings (0.48 sec)
+mysql> desc STUDENT;
+
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| NAME    | varchar(100) | YES  |     | NULL    |       |
+| ROLLNO  | int          | YES  |     | NULL    |       |
+| ADDRESS | varchar(100) | YES  |     | NULL    |       |
+| GENDER  | varchar(10)  | YES  |     | NULL    |       |
+| PHONENO | int          | YES  |     | NULL    |       |
+| BRANCH  | varchar(100) | YES  |     | NULL    |       |
+| MARK1   | int          | YES  |     | NULL    |       |
+| MARK2   | int          | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+
+
+mysql> ALTER TABLE STUDENT ADD TOTALMARKS int(50);
+Query OK, 0 rows affected, 1 warning (0.32 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+mysql> desc STUDENT;
+
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| NAME       | varchar(100) | YES  |     | NULL    |       |
+| ROLLNO     | int          | YES  |     | NULL    |       |
+| ADDRESS    | varchar(100) | YES  |     | NULL    |       |
+| GENDER     | varchar(10)  | YES  |     | NULL    |       |
+| PHONENO    | int          | YES  |     | NULL    |       |
+| BRANCH     | varchar(100) | YES  |     | NULL    |       |
+| MARK1      | int          | YES  |     | NULL    |       |
+| MARK2      | int          | YES  |     | NULL    |       |
+| TOTALMARKS | int          | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+mysql> ALTER TABLE STUDENT MODIFY ADDRESS varchar(20);
+Query OK, 0 rows affected (1.81 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc STUDENT;
+
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| NAME       | varchar(100) | YES  |     | NULL    |       |
+| ROLLNO     | int          | YES  |     | NULL    |       |
+| ADDRESS    | varchar(20)  | YES  |     | NULL    |       |
+| GENDER     | varchar(10)  | YES  |     | NULL    |       |
+| PHONENO    | int          | YES  |     | NULL    |       |
+| BRANCH     | varchar(100) | YES  |     | NULL    |       |
+| MARK1      | int          | YES  |     | NULL    |       |
+| MARK2      | int          | YES  |     | NULL    |       |
+| TOTALMARKS | int          | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+
+mysql> ALTER TABLE STUDENT DROP COLUMN GENDER;
+mysql> ALTER TABLE STUDENT DROP COLUMN BRANCH,DROP COLUMN TOTALMARKS;
+mysql> DESC STUDENT;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| NAME    | varchar(100) | YES  |     | NULL    |       |
+| ROLLNO  | int          | YES  |     | NULL    |       |
+| ADDRESS | varchar(20)  | YES  |     | NULL    |       |
+| PHONENO | int          | YES  |     | NULL    |       |
+| MARK1   | int          | YES  |     | NULL    |       |
+| MARK2   | int          | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+mysql> ALTER TABLE STUDENT RENAME COLUMN MARK1 TO M1;
+Query OK, 0 rows affected (0.33 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> DESC STUDENT;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| NAME    | varchar(100) | YES  |     | NULL    |       |
+| ROLLNO  | int          | YES  |     | NULL    |       |
+| ADDRESS | varchar(20)  | YES  |     | NULL    |       |
+| PHONENO | int          | YES  |     | NULL    |       |
+| M1      | int          | YES  |     | NULL    |       |
+| MARK2   | int          | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+mysql> ALTER TABLE STUDENT RENAME TO STUDENT1;
+Query OK, 0 rows affected (0.39 sec)
+mysql> DESC STUDENT1;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| NAME    | varchar(100) | YES  |     | NULL    |       |
+| ROLLNO  | int          | YES  |     | NULL    |       |
+| ADDRESS | varchar(20)  | YES  |     | NULL    |       |
+| PHONENO | int          | YES  |     | NULL    |       |
+| M1      | int          | YES  |     | NULL    |       |
+| MARK2   | int          | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+mysql> DROP TABLE STUDENT1;
+Query OK, 0 rows affected (0.29 sec)
+mysql> DESC STUDENT1 
+ERROR 1146 (42S02): Table 'advaithrpai5.STUDENT1' doesn't exist
