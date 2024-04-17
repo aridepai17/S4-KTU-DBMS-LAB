@@ -1,0 +1,202 @@
+SUM OF TWO NUMBERS														
+
+set serveroutput on;															
+Declare																				
+var1 integer;																		
+var2 integer;
+var3 integer;
+Begin
+var1:=&var1;
+var2:=&var2;
+var3:=var1+var2;
+dbms_output.put_line('SUM IS = '||var3);
+End;
+/
+
+OUTPUT
+
+Enter the value of Var1: 10
+Enter the value of Var2: 7
+SUM IS 17
+
+LARGEST OF THREE NUMBERS
+																																														
+set serveroutput on;															
+Declare																				
+a number;																			
+b number;																			
+c number;
+Begin
+a:=&a;
+b:=&b;
+c:=&c;
+if(a>b) and (a>c)
+then
+dbms_output.put_line('A IS THE GREATEST '||A);
+elsif(b>a) and (b>c)
+then
+dbms_output.put_line('B IS THE GREATEST '||B);
+else
+dbms_output.put_line('C IS THE GREATEST '||C);
+end if;
+End;
+/
+
+OUTPUT
+
+Enter the value of a: 5
+Enter the value of b : 10
+Enter the value of c : 8
+B IS GREATEST 10
+
+FACTORIAL OF A NUMBERS											
+
+set serveroutput on;													
+Declare																		
+i number(4):=1;
+n number(4):=&n;
+f number(4):=1;
+begin
+for i in 1..n
+loop
+f:=f*i;
+end loop;
+dbms_output.put_line('THE FACTORIAL OF '||n||' IS: '||f);
+End;
+/
+
+OUTPUT
+
+Enter the value of n : 5
+THE FACTORIAL OF 5 IS: 120
+
+FIBONACCI SERIES																			
+
+set serveroutput on;																	
+Declare																						
+first number:=0;																		
+second number:=1;																	
+third number;																			
+n number:=&amp;n;																
+i number;																					
+Begin																						
+dbms_output.put_line('Fibonacci series is:  '');
+dbms_output.put_line(first);
+dbms_output.put_line(second);
+for i in 2..n
+loop
+third:=first+second;
+first:=second;
+second:=third;
+dbms_output.put_line(third);
+
+end loop;
+End;
+/
+
+OUTPUT
+
+Enter the value of n: 5
+Fibonacci Series is:
+0
+1
+1
+2
+3
+5
+
+REVERSE OF A NUMBER 										
+
+set serveroutput on;												
+Declare																	
+n number;
+i number;
+rev number:=0;
+r number;
+
+Begin
+n:=&n;
+
+while n>0
+loop
+r:=mod(n,10);
+rev:=(rev*10)+r;
+
+n:=trunc(n/10);
+end loop;
+
+dbms_output.put_line('Reverse is '||rev);
+End;
+/
+
+OUTPUT
+
+Enter the value of n: 5671
+Reverse is: 1765
+
+STRING PALINDROME													 			
+set serveroutput on;																				
+Declare																									
+len number;
+
+palstr varchar2(20) := '&palstr'; 
+chkstr varchar2(20);
+
+Begin
+len := length(palstr);
+for i in REVERSE 1..len loop chkstr := chkstr||substr(palstr,i,1); 
+end loop;
+if chkstr = palstr then
+dbms_output.put_line(palstr||' is a PALINDROME'); 
+else
+dbms_output.put_line(palstr||' is not a PALINDROME');
+end if;
+End;
+/
+
+OUTPUT
+
+Enter the value of palstr: hello
+hello is not a PALINDROME
+
+Enter the value of palstr: racecar
+racecar is a PALINDROME
+
+PROGRAM TO STORE EVEN & ODD NUMBERS FROM 1-20
+
+set serveroutput on;
+CREATE TABLE EVEN1(nos number(2)); 
+CREATE TABLE ODD1(nos number(2));
+Declare
+n number:=&n;
+
+Begin
+for i in 1..n loop
+if mod(i,2)=0 
+then
+INSERT INTO EVEN1 values(i); 
+else
+INSERT INTO ODD1 values(i); 
+end if;
+end loop; 
+End;
+SELECT * from EVEN1; 
+SELECT * from ODD1; 
+/
+
+OUTPUT
+
+Enter the value of n: 20
+
+NOS													NOS
+1 		2												1 			1
+2 		4 												2 			3
+3 		6 												3 			5
+4 		8 												4 			7
+5 		10 											5 			9
+6 		12 											6 			11
+7 		14 										7 			13
+8 		16 											8 			15
+9 		18												9 			17
+10      20									         10 			19
+
