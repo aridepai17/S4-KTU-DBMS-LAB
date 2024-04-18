@@ -1,0 +1,74 @@
+DROP TABLE THEATRE;
+DROP TABLE OUTDATEDMOVIES;
+
+CREATE TABLE THEATRE (MOVIEID int, NAME varchar(50), LANGUAGE varchar(25), REVIEWRATINGS int);
+
+INSERT INTO THEATRE VALUES (1001, 'OPPENHEIMER', 'ENGLISH', 10);
+INSERT INTO THEATRE VALUES (1002, 'MAESTRO', 'ENGLISH', 6);
+INSERT INTO THEATRE VALUES (1003, 'TAXI DRIVER', 'ENGLISH', 7);
+INSERT INTO THEATRE VALUES (1004, 'ANATOMY OF A FALL', 'FRENCH', 8);
+INSERT INTO THEATRE VALUES (1005, 'THE ZONE OF INTEREST', 'GERMAN', 9);
+
+SELECT * FROM THEATRE;
+
+CREATE TABLE OUTDATEDMOVIES (MOVIEID int, NAME varchar(50));
+
+CREATE TRIGGER T2 AFTER DELETE ON THEATRE FOR EACH ROW
+
+BEGIN
+INSERT INTO OUTDATEDMOVIES VALUES(:old.MOVIEID, :old.NAME);
+	
+END;
+/
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+id int:=&MOVIEID;
+r int:=&NEWRATING;
+
+BEGIN
+if r < 5 then
+DELETE FROM THEATRE WHERE MOVIEID = ID;
+end if;
+END;
+/
+		
+SELECT * FROM THEATRE;
+SELECT * FROM OUTDATEDMOVIES;
+
+OUTPUT
+ 
+MOVIEID       NAME                      LANGUAGE    REVIEWRATINGS
+-----------  -------------------------  ----------  --------------
+1001          OPPENHEIMER               ENGLISH     10
+1002          MADAME WEB                ENGLISH     6
+1003          TAXI DRIVER               ENGLISH     7
+1004          ANATOMY OF A FALL         FRENCH      8
+1005          THE ZONE OF INTEREST      GERMAN      9
+
+Table created.
+Trigger created.
+
+
+Enter value for MOVIEID: 1002
+old   2: 	id int:=&MOVIEID;
+new   2: 	id int:=1002;
+Enter value for new_rating: 4
+old   3: 	r int:=&NEWRATING;
+new   3: 	r int:=4;
+
+PL/SQL procedure successfully completed.
+
+MOVIEID       NAME                      LANGUAGE    REVIEWRATINGS
+-----------  -------------------------  ----------  --------------
+1001          OPPENHEIMER               ENGLISH     10
+1003          TAXI DRIVER               ENGLISH     7
+1004          ANATOMY OF A FALL         FRENCH      8
+1005          THE ZONE OF INTEREST      GERMAN      9
+
+
+MOVIEID    NAME
+--------   -------------  
+1002       MADAME WEB
+

@@ -1,0 +1,70 @@
+DROP TABLE WORKER;
+
+CREATE TABLE WORKER(id number(5),name varchar(20),salary number(10));
+
+INSERT INTO WORKER VALUES (101,'ARI',100000);
+INSERT INTO WORKER VALUES (202,'ALBERT',500000);
+INSERT INTO WORKER VALUES (303,'HELEN',300000);
+INSERT INTO WORKER VALUES (404,'CHRIS',200000);
+INSERT INTO WORKER VALUES (505,'GEORGE',150000);
+
+SELECT * FROM WORKER;
+
+CREATE TRIGGER T AFTER UPDATE OF SALARY ON WORKER FOR EACH WORKER
+
+Declare
+a number(10);
+
+Begin
+a:=:new.salary-:old.salary;
+dbms_output.put_line('Difference in salary is: '||a);
+
+End;
+/
+
+
+
+set serveroutput on;
+
+Declare
+n number(10):=&workerid;
+nwsal number(10):=&nwsal;
+
+Begin
+UPDATE WORKER SET SALARY = nwsal where id=n;
+End;
+/
+
+SELECT * FROM WORKER;
+
+OUTPUT
+
+        ID   NAME 		   SALARY
+----------   ----------------- ----------
+       101   ARI	           100000
+       202   ALBERT		   500000
+       303   HELEN		   300000
+       404   CHRIS		   200000
+       505   GEORGE 		   150000
+
+
+Trigger created.
+
+Enter value for workerid: 101
+old   2: n number(10):=&workerid;
+new   2: n number(10):=101;
+Enter value for nwsal: 150000
+old   3: nwsal number(10):=&nwsal;
+new   3: nwsal number(10):=150000;
+Difference in salary is 50000
+
+PL/SQL procedure successfully completed.
+
+
+	ID   NAME 		    SALARY
+----------   ------------------ ----------
+     101     ARI	            150000
+     202     ALBERT		    500000
+     303     HELEN		    305000
+     404     CHRIS		    200000
+     505     GEORGE 		    150000
