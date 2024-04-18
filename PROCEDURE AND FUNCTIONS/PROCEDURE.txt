@@ -1,0 +1,42 @@
+CREATE OE REPLACE PROCEDURE (a1 in number, b1 in number)
+AS
+Begin
+	if (a1>b1) then
+		Dbms_output.put_line('A is the larger '||a1);
+	else
+		Dbms_output.put_line('B is the larger '||b1);	
+	end if;
+	
+END LARGEST;
+/
+
+set serveroutput on
+
+DECLARE
+
+a number;
+b number;
+
+BEGIN 
+
+a:=&a;
+b:=&b;
+
+LARGEST(a,b);
+
+END;
+/
+
+OUTPUT
+
+Procedure created.
+
+Enter value for a: 77
+old   8: a:=&a;
+new   8: a:=45;
+Enter value for b: 24
+old   9: b:=&b;
+new   9: b:=18;
+A is the larger 77
+
+PL/SQL procedure successfully completed.
