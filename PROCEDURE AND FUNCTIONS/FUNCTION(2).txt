@@ -1,0 +1,84 @@
+DROP TABLE EMPLOYEE;
+DROP PROCEDURE UPDATEFN;
+
+CREATE TABLE EMPLOYEE (EMPID int, EMPNAME varchar(20), SALARY int, DEPT varchar(20), WEF date);
+
+INSERT INTO EMPLOYEE VALUES(101, 'DAVE',700000, 'AI', '15-03-2023');
+INSERT INTO EMPLOYEE VALUES(102, 'KAT', 500000, 'CS', '17-05-2023' );
+INSERT INTO EMPLOYEE VALUES(103, 'ARI', 300000, 'IT', '23-07-2023');
+INSERT INTO EMPLOYEE VALUES(104, 'ADAM', 200000, 'IT', '25-08-2023');
+INSERT INTO EMPLOYEE VALUES(105, 'PAUL', 100000, 'CS', '20-10-2023' );
+
+SELECT * FROM EMPLOYEE;
+
+CREATE OR REPLACE FUNCTION UPDATFN(a IN number, b IN number)
+RETURN number
+AS
+c number;
+d date;
+
+Begin
+	SELECT sysdate INTO d from DUAL;
+	UPDATE EMPLOYEE SET SALARY = SALARY + (SALARY*(b/100)) WHERE EMPID = a;
+	UPDATE EMPLOYEE SET WEF = d WHERE EMPID = a;
+	SELECT SALARY INTO C FROM EMPLOYEE WHERE EMPID = a;
+	return(c);
+
+	
+END;
+/
+
+set serveroutput on
+
+DECLARE
+
+ID number;
+P number;
+F number;
+
+BEGIN 
+
+ID:=&ID;
+P:=&P;
+
+f:=UPDATEFN(ID , P);
+dbms_output.put_line('New Salary is: '||f);
+
+END;
+/
+
+SELECT * FROM EMPLOYEE;
+
+
+OUTPUT
+
+
+
+     EMPID EMPAME		    SALARY DEPT 		WEF
+---------- -------------------- ---------- -------------------- --------
+       101 DAVE 		    700000 AI			15-03-23
+       102 KAT			    500000 CS			17-05-23
+       103 ARI  		    300000 IT			23-07-23
+       104 ADAM  		    200000 IT			25-08-23
+       105 PAUL  		    100000 CS		        20-10-23
+
+Procedure created.
+
+Enter value for ID: 101
+old   8: ID:=&ID;
+new   8: ID:=101;
+Enter value for P: 10
+old   9: P:=&p;
+new   9: P:=10;
+New Salary is: 770000
+
+PL/SQL procedure successfully completed.
+
+
+     EMPID EMPAME		    SALARY DEPT 		WEF
+---------- -------------------- ---------- -------------------- --------
+       101 DAVE 		    770000 AI			18-04-24
+       102 KAT			    500000 CS			17-05-23
+       103 ARI   		    300000 IT			23-07-23
+       104 ADAM  		    200000 IT			25-08-23
+       105 PAUL  		    100000 CS		        20-10-23

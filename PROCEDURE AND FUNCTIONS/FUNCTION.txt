@@ -1,0 +1,46 @@
+CREATE OR REPLACE FUNCTION L1(a1 IN number, b1 IN number) RETURN NUMBER AS 
+c1 number;
+Begin
+	if (a1>b1) then
+		c1:=a1;
+	else
+		c1:=b1;	
+	end if;
+	
+	return(c1);
+	
+END;
+/
+
+set serveroutput on
+
+DECLARE
+
+a number;
+b number;
+c number;
+
+BEGIN 
+
+a:=&a;
+b:=&b;
+
+c:=L1(a,b);
+Dbms_output.put_line('Larger number is'||c);
+
+END;
+/
+
+OUTPUT
+
+Function created.
+
+Enter value for a: 77
+old   9: a:=&a;
+new   9: a:=77;
+Enter value for b: 66
+old  10: b:=&b;
+new  10: b:=66;
+Larger number is 77
+
+PL/SQL procedure successfully completed.
